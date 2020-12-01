@@ -26,20 +26,52 @@ namespace Day1
 
             foreach(var integer in inputList)
             {
-                var checkNum = 2020 - integer;
-                if(inputList.Contains(checkNum))
+                var checkOutput = CheckNumber(2020, integer, inputList);
+
+                if(checkOutput != -1)
                 {
                     num1 = integer;
-                    num2 = checkNum;
-                    break;
+                    num2 = checkOutput;
                 }
             }
 
             //Take the two numbers and multiply them, then write
-            Console.WriteLine($"The numbers are {num1} and {num2} = {(num1 * num2)}");
-
+            Console.WriteLine($"The numbers of part1 are {num1} and {num2} = {(num1 * num2)}");
 
             //Part 2
+            int num3 = 0;
+
+            foreach (var integer1 in inputList)
+            {
+                foreach(var integer2 in inputList)
+                {
+                    if(integer1 == integer2)
+                    {
+                        continue;
+                    }
+
+                    var checkOutput = CheckNumber((2020 - integer1), integer2, inputList);
+
+                    if (checkOutput != -1)
+                    {
+                        num1 = integer1;
+                        num2 = integer2;
+                        num3 = checkOutput;
+                    }
+                }
+            }
+
+            Console.WriteLine($"The numbers of part2 are {num1}, {num2}, {num3} = {(num1 * num2 * num3)}");
+        }
+
+        static int CheckNumber(int expectedTotal, int checkNum, List<int> listToReference)
+        {
+            var huntedNumber = expectedTotal - checkNum;
+            if (listToReference.Contains(huntedNumber))
+            {
+                return huntedNumber;
+            }
+            return -1;
         }
     }
 }

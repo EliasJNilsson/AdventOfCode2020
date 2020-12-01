@@ -36,3 +36,5 @@ Advent Of Code 2020/obj/Advent Of Code 2020.csproj.nuget.g.targets
 Advent Of Code 2020/obj/Debug/netcoreapp3.1/Advent Of Code 2020.AssemblyInfoInputs.cache
 *.cache
 Day1/obj/Debug/netcoreapp3.1/Day1.csproj.FileListAbsolute.txt
+Day1/obj/Debug/netcoreapp3.1/Day1.pdb
+Day1/bin/Debug/netcoreapp3.1/Day1.pdb
