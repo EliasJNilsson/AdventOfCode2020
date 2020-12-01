@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+Advent Of Code 2020/.vs/Advent Of Code 2020/v16/.suo
+Advent Of Code 2020/obj/Advent Of Code 2020.csproj.nuget.g.props
+Advent Of Code 2020/obj/Advent Of Code 2020.csproj.nuget.g.targets
+Advent Of Code 2020/obj/Debug/netcoreapp3.1/Advent Of Code 2020.AssemblyInfoInputs.cache
+*.cache
