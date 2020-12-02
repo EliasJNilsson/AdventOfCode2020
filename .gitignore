@@ -38,3 +38,11 @@ Advent Of Code 2020/obj/Debug/netcoreapp3.1/Advent Of Code 2020.AssemblyInfoInpu
 Day1/obj/Debug/netcoreapp3.1/Day1.csproj.FileListAbsolute.txt
 Day1/obj/Debug/netcoreapp3.1/Day1.pdb
 Day1/bin/Debug/netcoreapp3.1/Day1.pdb
+Advent Of Code 2020/.vs/Advent Of Code 2020/DesignTimeBuild/.dtbcache.v2
+*.pdb
+Advent Of Code 2020/Day2/obj/Debug/netcoreapp3.1/Day2.AssemblyInfo.cs
+Advent Of Code 2020/Day2/obj/Debug/netcoreapp3.1/Day2.csproj.FileListAbsolute.txt
+Advent Of Code 2020/Day2/bin/Debug/netcoreapp3.1/Day2.runtimeconfig.dev.json
+*.json
+*.props
+*.targets
