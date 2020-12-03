@@ -10,47 +10,57 @@ namespace Day3
 
             var splitText = streamText.Split("\n");
 
-            int col = splitText[0].Length;
+            int treeCount = Run(3, splitText);
+
+            Console.WriteLine($"The count of how many trees hit in part 1 (3r, 1d) is: {treeCount}");
+
+
+            //Part 2
+            //I could do it the more "effiecent" way and have all the runs at once, but for simplicity of my brain, I'll copy part 1, and just alter each slightly for each outcome.
+
+        }
+
+        static int Run(int right, string[] input)
+        {
+            //Part 1
+            int col = input[0].Length;
             var treeCount = 0;
             int placement = 0;
             bool isFirstRow = true;
 
-            foreach(var row in splitText)
+            foreach (var row in input)
             {
-                //Part 1
-                placement += 3;
-                if(placement >= col)
+                if(isFirstRow)
+                {
+                    isFirstRow = false;
+                    continue;
+                }
+
+                placement += right;
+                if (placement >= col)
                 {
                     placement -= col;
                 }
 
-                if (!isFirstRow)
+                if (IsThereTree(placement, row))
                 {
-                    if (IsThereTree(placement, row))
-                    {
-                        treeCount++;
-                    }
+                    treeCount++;
                 }
-                else
-                {
-                    isFirstRow = false;
-                    placement -= 3;
-                }
+
             }
 
-            Console.WriteLine($"The count of how many trees hit is: {treeCount}");            
-
+            return treeCount;
         }
 
         static bool IsThereTree(int col, string row)
         {
             if (row[col] == '#')
             {
-                Console.WriteLine($"hit tree: {row[col]}");
+                //Console.WriteLine($"hit tree: {row[col]}");
                 return true;
             }
 
-            Console.WriteLine($"clear snow: {row[col]}");
+            //Console.WriteLine($"clear snow: {row[col]}");
             return false;
         }
     }
