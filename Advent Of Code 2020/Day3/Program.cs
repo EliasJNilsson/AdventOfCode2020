@@ -13,6 +13,7 @@ namespace Day3
             int col = splitText[0].Length;
             var treeCount = 0;
             int placement = 0;
+            bool isFirstRow = true;
 
             foreach(var row in splitText)
             {
@@ -23,9 +24,17 @@ namespace Day3
                     placement -= col;
                 }
 
-                if(IsThereTree(placement, row))
+                if (!isFirstRow)
                 {
-                    treeCount++;
+                    if (IsThereTree(placement, row))
+                    {
+                        treeCount++;
+                    }
+                }
+                else
+                {
+                    isFirstRow = false;
+                    placement -= 3;
                 }
             }
 
