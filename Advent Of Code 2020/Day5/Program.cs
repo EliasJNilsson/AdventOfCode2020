@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Day5
 {
@@ -7,43 +8,66 @@ namespace Day5
     {
         static void Main(string[] args)
         {
-            string streamText = System.IO.File.ReadAllText(@"..\..\..\input.txt");
-            var splitText = streamText.Split("\n");
+            var input = System.IO.File.ReadAllLines(@"..\..\..\input.txt");
+            var rows = input.Select(l => Convert.ToByte(l.Substring(0, 7).Aggregate("0", (s, c) =>
+                s + c switch { 'F' => '0', 'B' => '1' }), 2)
+            ).ToArray();
+            var cols = input.Select(l => Convert.ToByte(l.Substring(7).Aggregate("0", (s, c) =>
+                s + c switch { 'L' => '0', 'R' => '1' }), 2)
+            ).ToArray();
 
-            var part1HighestValue = 0;
+            var ids = rows.Zip(cols).Select(z => z.First * 8 + z.Second).OrderBy(id => id).ToArray();
+            Console.WriteLine($"Part 1: {ids.Max()}");
 
-            foreach (string input in splitText)
-            {
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    continue;
-                }
-
-                //make queues
-                var subRows = input.Substring(0, 7);
-                var subSeat = input.Substring(7);
-
-                Queue<char> rowsQueue = new Queue<char>(subRows);
-                Queue<char> seatQueue = new Queue<char>(subSeat);
+            var mine = ids.Zip(ids.Skip(1)).Where(z => z.Second - z.First > 1);
+            Console.WriteLine($"Part 2: {mine.First()} => {mine.First().First + 1}");
 
 
-                //get row
-                var outputRows = searchRows(rowsQueue, 0, 127);
 
-                //get seat
-                var outputSeat = searchSeats(seatQueue, 0, 8);
 
-                //multiply
-                var boardingPassId = outputRows * outputSeat;
-                Console.WriteLine($"The search row and seat multiply to: {boardingPassId}");
+            //{
+            //    string streamText = System.IO.File.ReadAllText(@"..\..\..\input.txt");
+            //    var splitText = streamText.Split("\n");
 
-                if(part1HighestValue < boardingPassId)
-                {
-                    part1HighestValue = boardingPassId;
-                }
-            }
+            //    var part1HighestValue = 0;
 
-            Console.WriteLine($"The largest boarding pass Id value is: {part1HighestValue}");
+            //    foreach (string input in splitText)
+            //    {
+            //        if (string.IsNullOrWhiteSpace(input))
+            //        {
+            //            continue;
+            //        }
+
+            //        //make queues
+            //        var subRows = input.Substring(0, 7);
+            //        var subSeat = input.Substring(7);
+
+            //        Queue<char> rowsQueue = new Queue<char>(subRows);
+            //        Queue<char> seatQueue = new Queue<char>(subSeat);
+
+            //        if(input == "BBBBBFFRRL")
+            //        {
+            //            ;
+            //        }
+
+
+            //        //get row
+            //        var outputRows = searchRows(rowsQueue, 0, 127);
+
+            //        //get seat
+            //        var outputSeat = searchSeats(seatQueue, 0, 8);
+
+            //        //multiply
+            //        var boardingPassId = outputRows * 8 + outputSeat;
+            //        Console.WriteLine($"The search row and seat multiply to: {boardingPassId}");
+
+            //        if(part1HighestValue < boardingPassId)
+            //        {
+            //            part1HighestValue = boardingPassId;
+            //        }
+            //    }
+
+            //    Console.WriteLine($"The largest boarding pass Id value is: {part1HighestValue}");
 
         }
 
