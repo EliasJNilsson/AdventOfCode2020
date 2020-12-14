@@ -6,6 +6,8 @@ namespace Day11
 {
     class Program
     {
+
+        //From mostly https://gist.github.com/jamierocks/95261e7a59df485f303384d3ca53024a
         static void Main(string[] args)
         {
             ReadInput();
