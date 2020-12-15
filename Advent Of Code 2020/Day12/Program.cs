@@ -10,6 +10,8 @@ namespace Day12
 
             Part1(input);
 
+            Part2(input);
+
         }
 
         static public void Part1(string[] input)
@@ -62,6 +64,185 @@ namespace Day12
             Console.WriteLine($"The final Direction is {direction}, the eastWest is {eastWest}, the northSouth is {northSouth}");
 
             Console.WriteLine($"The Manhattan distance is {Math.Abs(eastWest) + Math.Abs(northSouth)}");
+
+            return;
+        }
+
+        static public void Part2(string[] input)
+        {
+            var cardinalDir1 = 'E';
+            var cardinalDir2 = 'N';
+
+            var cardinalUnit1 = 10;
+            var cardinalUnit2 = 1;
+
+
+            var TotalCardinalNS = 0;
+            var TotalCardinalEW = 0;
+
+            foreach (var str in input)
+            {
+                if (str[0] == 'R')
+                {
+                    cardinalDir1 = TurnRight(cardinalDir1, int.Parse(str.Substring(1)));
+                    cardinalDir2 = TurnRight(cardinalDir2, int.Parse(str.Substring(1)));
+                    continue;
+                }
+                if (str[0] == 'L')
+                {
+                    cardinalDir1 = TurnLeft(cardinalDir1, int.Parse(str.Substring(1)));
+                    cardinalDir2 = TurnLeft(cardinalDir2, int.Parse(str.Substring(1)));
+                    continue;
+                }
+
+                // Move in directions.
+                if (str[0] == 'N')
+                {
+                    if(cardinalDir1 == 'N')
+                    {
+                        cardinalUnit1 += int.Parse(str.Substring(1));
+                    }
+                    else if( cardinalDir1 == 'S')
+                    {
+                        cardinalUnit1 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'N')
+                    {
+                        cardinalUnit2 += int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'S')
+                    {
+                        cardinalUnit2 -= int.Parse(str.Substring(1));
+                    }
+                    continue;
+                }
+                if (str[0] == 'S')
+                {
+                    if (cardinalDir1 == 'N')
+                    {
+                        cardinalUnit1 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir1 == 'S')
+                    {
+                        cardinalUnit1 += int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'N')
+                    {
+                        cardinalUnit2 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'S')
+                    {
+                        cardinalUnit2 += int.Parse(str.Substring(1));
+                    }
+                    continue;
+                }
+                if (str[0] == 'E')
+                {
+                    if (cardinalDir1 == 'E')
+                    {
+                        cardinalUnit1 += int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir1 == 'W')
+                    {
+                        cardinalUnit1 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'E')
+                    {
+                        cardinalUnit2 += int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'W')
+                    {
+                        cardinalUnit2 -= int.Parse(str.Substring(1));
+                    }
+                    continue;
+                }
+                if (str[0] == 'W')
+                {
+                    if (cardinalDir1 == 'E')
+                    {
+                        cardinalUnit1 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir1 == 'W')
+                    {
+                        cardinalUnit1 += int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'E')
+                    {
+                        cardinalUnit2 -= int.Parse(str.Substring(1));
+                    }
+                    else if (cardinalDir2 == 'W')
+                    {
+                        cardinalUnit2 += int.Parse(str.Substring(1));
+                    }
+                    continue;
+                }
+
+                if(str[0] == 'F')
+                {
+                    int forwardCount = int.Parse(str.Substring(1));
+
+                    //MOVE FORWARD
+                    if(cardinalDir1 == 'N' || cardinalDir1 == 'S')
+                    {
+                        //cardinal dir 1 == north or south
+
+                        if(cardinalDir1 == 'N')
+                        {
+                            TotalCardinalNS += cardinalUnit1 * forwardCount;
+                        }
+                        else
+                        {
+                            TotalCardinalNS -= cardinalUnit1 * forwardCount;
+                        }
+                    }
+                    else
+                    {
+                        //Cardinal dir 1 == east or west
+                        if (cardinalDir1 == 'E')
+                        {
+                            TotalCardinalEW += cardinalUnit1 * forwardCount;
+                        }
+                        else
+                        {
+                            TotalCardinalEW -= cardinalUnit1 * forwardCount;
+                        }
+                    }
+
+                    if (cardinalDir2 == 'N' || cardinalDir2 == 'S')
+                    {
+                        //cardinal dir 2 == north or south
+
+                        if (cardinalDir2 == 'N')
+                        {
+                            TotalCardinalNS += cardinalUnit2 * forwardCount;
+                        }
+                        else
+                        {
+                            TotalCardinalNS -= cardinalUnit2 * forwardCount;
+                        }
+                    }
+                    else
+                    {
+                        //Cardinal dir 2 == east or west
+                        if (cardinalDir2 == 'E')
+                        {
+                            TotalCardinalEW += cardinalUnit2 * forwardCount;
+                        }
+                        else
+                        {
+                            TotalCardinalEW -= cardinalUnit2 * forwardCount;
+                        }
+                    }
+
+                }
+
+            }
+            Console.WriteLine("Look here");
+
+            //Results
+            //Console.WriteLine($"The final Direction is {direction}, the eastWest is {eastWest}, the northSouth is {northSouth}");
+
+            Console.WriteLine($"The Manhattan distance is {Math.Abs(TotalCardinalNS) + Math.Abs(TotalCardinalEW)}");
 
             return;
         }
